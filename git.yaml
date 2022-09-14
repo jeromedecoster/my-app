@@ -16,7 +16,9 @@ spec:
   template:
     metadata:
       name: '{{path.basename}}'
-      namespace: default
+      namespace: '{{path.basename}}' # default ok
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
     spec:
       project: default
       source:
@@ -25,7 +27,7 @@ spec:
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: default
+        namespace: '{{path.basename}}' # default ok
       syncPolicy:
         syncOptions:
         - CreateNamespace=true
