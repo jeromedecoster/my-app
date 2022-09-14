@@ -9,8 +9,8 @@ spec:
       generators:
       - list:
           elements:
-          - env: dev
           - env: prd
+          - env: dev
       # This is a git generator, reference here https://argocd-applicationset.readthedocs.io/en/stable/Generators-Git/
       - git:
           repoURL: https://github.com/jeromedecoster/my-app.git
