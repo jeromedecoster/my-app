@@ -21,7 +21,7 @@ spec:
             exclude: true
   template:
     metadata:
-      name: '{{path.basename}}'
+      name: '{{path.basename}}-{{env}}'
       namespace: '{{path.basename}}-{{env}}'
       finalizers:
         - resources-finalizer.argocd.argoproj.io
