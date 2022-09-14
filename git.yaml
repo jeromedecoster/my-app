@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: git-applicaitonset
-  namespace: argocd
+  # namespace: argocd
 spec:
   generators:
   # This is a git generator, reference here https://argocd-applicationset.readthedocs.io/en/stable/Generators-Git/
@@ -16,7 +16,7 @@ spec:
   template:
     metadata:
       name: '{{path.basename}}'
-      namespace: '{{path.basename}}'
+      # namespace: '{{path.basename}}'
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
