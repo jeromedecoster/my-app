@@ -3,11 +3,20 @@ kind: Service
 metadata:
   name: my-app-svc
 spec:
+  type: LoadBalancer
   selector:
     app: my-app
-  type: NodePort
   ports:
   - port: 9000
-    nodePort: 31000
     protocol: TCP
     targetPort: 5678 
+
+# spec:
+#   selector:
+#     app: my-app
+#   type: NodePort
+#   ports:
+#   - port: 9000
+#     nodePort: 31000
+#     protocol: TCP
+#     targetPort: 5678 

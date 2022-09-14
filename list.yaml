@@ -13,6 +13,9 @@ spec:
     metadata:
       # will generate applications with different names for example (dev-app, test-app, etc..)
       name: '{{namespace}}-app'
+      # https://argo-cd.readthedocs.io/en/stable/user-guide/app_deletion/#about-the-deletion-finalizer
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
     spec:
       # applications will be in default project for argocd
       project: default
