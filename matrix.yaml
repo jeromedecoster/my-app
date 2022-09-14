@@ -9,8 +9,8 @@ spec:
       generators:
       - list:
           elements:
-          - env: prd
           - env: dev
+          - env: prd
       # This is a git generator, reference here https://argocd-applicationset.readthedocs.io/en/stable/Generators-Git/
       - git:
           repoURL: https://github.com/jeromedecoster/my-app.git
@@ -21,8 +21,8 @@ spec:
             exclude: true
   template:
     metadata:
-      name: '{{path.basename}}-{{env}}'
-      namespace: '{{path.basename}}-{{env}}'
+      name: '{{path.basename}}'
+      namespace: '{{env}}'
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
@@ -33,7 +33,7 @@ spec:
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{path.basename}}-{{env}}'
+        namespace: '{{env}}'
       syncPolicy:
         syncOptions:
         - CreateNamespace=true
