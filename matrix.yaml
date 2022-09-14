@@ -5,18 +5,24 @@ metadata:
   namespace: argocd
 spec:
   generators:
-  # This is a git generator, reference here https://argocd-applicationset.readthedocs.io/en/stable/Generators-Git/
-  - git:
-      repoURL: https://github.com/jeromedecoster/my-app.git
-      revision: HEAD
-      directories:
-      - path: git/*
-      - path: git/my-ignored-app
-        exclude: true
+  - matrix:
+      generators:
+      - list:
+          elements:
+          - env: dev
+          - env: prd
+      # This is a git generator, reference here https://argocd-applicationset.readthedocs.io/en/stable/Generators-Git/
+      - git:
+          repoURL: https://github.com/jeromedecoster/my-app.git
+          revision: HEAD
+          directories:
+          - path: git/*
+          - path: git/my-ignored-app
+            exclude: true
   template:
     metadata:
       name: '{{path.basename}}'
-      namespace: '{{path.basename}}'
+      namespace: '{{path.basename}}-{{env}}'
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
@@ -27,7 +33,7 @@ spec:
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{path.basename}}'
+        namespace: '{{path.basename}}-{{env}}'
       syncPolicy:
         syncOptions:
         - CreateNamespace=true
