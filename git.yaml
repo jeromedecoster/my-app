@@ -11,8 +11,8 @@ spec:
       revision: HEAD
       directories:
       - path: git/*
-      # - path: git/applicationset
-      #   exclude: true
+      - path: git/my-ignored-app
+        exclude: true
   template:
     metadata:
       name: '{{path.basename}}'

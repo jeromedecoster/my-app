@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-ignored-app
+spec:
+  selector:
+    matchLabels:
+      app: my-ignored-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: my-ignored-app
+    spec:
+      containers:
+      - name: my-ignored-app
+        image: hashicorp/http-echo
+        args:
+        - "-text=version 3-0-0"
+        ports:
+        - containerPort: 5678
