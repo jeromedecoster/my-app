@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-other-app
+spec:
+  selector:
+    matchLabels:
+      app: my-other-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: my-other-app
+    spec:
+      containers:
+      - name: my-other-app
+        image: hashicorp/http-echo
+        args:
+        - "-text=version 2-0-0"
+        ports:
+        - containerPort: 5678
