@@ -22,7 +22,7 @@ spec:
   template:
     metadata:
       name: '{{path.basename}}-{{env}}'
-      namespace: '{{env}}'
+      # namespace: '{{env}}'
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
